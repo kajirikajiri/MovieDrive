@@ -1,0 +1,115 @@
+img {
+  transition-duration: 0.3s;
+}
+
+img:hover {
+  transform: scale(1.1);
+}
+
+.logo {
+  font-size: 24px;
+}
+
+.profile-icon {
+  height: 32px;
+  width: 32px;
+}
+
+.icon {
+  height: 24px;
+  width: 24px;
+}
+
+.icon-round {
+  border-radius: 20px;
+  border-color: black;
+  border: solid;
+  border-width: 1px;
+}
+
+.progress {
+  height: 10px;
+  border-radius: 10px;
+}
+
+.progress-bar {
+  height: 10px;
+  background-color: gainsboro;
+  border-radius: 10px;
+}
+
+.swiper-custom-parent {
+  width: 100%;
+  position: relative;
+}
+
+.swiper-container {
+  width: 85%;
+  height: 220px;
+  padding: 10px;
+}
+
+.swiper-button-next,
+.swiper-button-prev {
+  backdrop-filter: blur(3px);
+  margin: 100;
+}
+
+.modal {
+  background-color: black;
+}
+
+video {
+  height: 50%;
+  width: 50%;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+}
+
+.batsu {
+  font-size: 150%;
+  font-weight: bold;
+  border: 1px solid #999;
+  color: #999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 100%;
+  width: 1.3em;
+  line-height: 1.3em;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.batsu:hover {
+  background: #333;
+  border-color: #333;
+  color: #fff;
+}
+
+.tree-viewer {
+  min-height: 60vh;
+}
+
+.tree-node {
+  width: 100%;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  user-select: none;
+  overflow: hidden;
+}
+.tree-node:hover {
+  background-color: rgb(231, 231, 231);
+  border-radius: 5px;
+}
+
+li.selected {
+  font-weight: bold;
+  color: rgb(3, 61, 138);
+  background-color: rgba(1, 132, 255, 0.2);
+  border-radius: 5px;
+}
+li.selected:hover {
+  background-color: rgba(1, 132, 255, 0.2);
+}

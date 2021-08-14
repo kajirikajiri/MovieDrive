@@ -2,8 +2,6 @@
 
 namespace App\Models;
 
-use App\Http\Controllers\DashboardController;
-
 class FileTree
 {
     const SEPARATOR = '/';
@@ -15,10 +13,11 @@ class FileTree
 
     public function __construct(string $root)
     {
+        $root = ltrim($root, 'public/');
         $array = explode(self::SEPARATOR, $root);
         $this->text = count($array) == 1 ? "マイディレクトリ" : $array[count($array) - 1];
         $this->full_path = $root;
-        $this->link = DashboardController::encriptLink($root);
+        $this->link = FileContent::encriptLink($root);
         $this->nodes = array();
         $this->depth = count($array);
     }

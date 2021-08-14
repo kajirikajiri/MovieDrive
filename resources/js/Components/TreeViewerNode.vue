@@ -1,26 +1,3 @@
-<style>
-.tree-node {
-  width: 100%;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  user-select: none;
-  overflow: hidden;
-}
-.tree-node:hover {
-  background-color: rgb(231, 231, 231);
-  border-radius: 5px;
-}
-
-li.selected {
-  font-weight: bold;
-  color: rgb(3, 61, 138);
-  background-color: rgba(1, 132, 255, 0.2);
-  border-radius: 5px;
-}
-li.selected:hover {
-  background-color: rgba(1, 132, 255, 0.2);
-}
-</style>
 
 <template>
   <li
@@ -61,6 +38,10 @@ export default {
       dblClickDelay: 200,
       isOpen: false,
     };
+  },
+  updated: function () {
+    console.debug(this.node);
+    console.debug(this.isOpen);
   },
   methods: {
     onClickRight: function (e) {

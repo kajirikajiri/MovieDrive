@@ -1,9 +1,3 @@
-<style>
-.tree-viewer {
-  min-height: 60vh;
-}
-</style>
-
 <template>
   <section class="tree-viewer">
     <ul>

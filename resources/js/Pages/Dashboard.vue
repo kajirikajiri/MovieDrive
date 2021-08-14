@@ -1,103 +1,5 @@
-<style>
-img {
-  transition-duration: 0.3s;
-}
-
-img:hover {
-  transform: scale(1.1);
-}
-
-.logo {
-  font-size: 24px;
-}
-
-.profile-icon {
-  height: 32px;
-  width: 32px;
-}
-
-.icon {
-  height: 24px;
-  width: 24px;
-}
-
-.icon-round {
-  border-radius: 20px;
-  border-color: black;
-  border: solid;
-  border-width: 1px;
-}
-
-.progress {
-  height: 10px;
-  border-radius: 10px;
-}
-
-.progress-bar {
-  height: 10px;
-  background-color: gainsboro;
-  border-radius: 10px;
-}
-
-.swiper-custom-parent {
-  width: 100%;
-  position: relative;
-}
-
-.swiper-container {
-  width: 85%;
-  height: 220px;
-  padding: 10px;
-}
-
-.swiper-button-next,
-.swiper-button-prev {
-  backdrop-filter: blur(3px);
-  margin: 100;
-}
-
-.modal {
-  background-color: black;
-}
-
-video {
-  height: 50%;
-  width: 50%;
-  margin-left: auto;
-  margin-right: auto;
-  display: block;
-}
-
-.batsu {
-  font-size: 150%;
-  font-weight: bold;
-  border: 1px solid #999;
-  color: #999;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-radius: 100%;
-  width: 1.3em;
-  line-height: 1.3em;
-  cursor: pointer;
-  transition: 0.2s;
-}
-
-.batsu:hover {
-  background: #333;
-  border-color: #333;
-  color: #fff;
-}
-</style>
-
 <template>
   <app-layout title="Dashboard">
-    <template #header>
-      <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-        Dashboard
-      </h2>
-    </template>
-
     <div class="container">
       <div class="row pt-5">
         <div class="border-right col-md-4 col-lg-2 p-4">
@@ -113,9 +15,7 @@ video {
                 aria-valuemax="100"
               ></div>
             </div>
-            <div style="font-size: 16px">
-              <span>保存容量</span>
-              <span>　</span>
+            <div style="font-size: 16px" class="text-center">
               <span>
                 {{ progress.volumeSize }}GB中
                 {{ progress.usedVolumeSize }}GB使用中
@@ -170,7 +70,6 @@ video {
                       <input
                         type="file"
                         id="file-selecter"
-                        name="files"
                         @change="uploadFiles"
                         required
                         multiple
@@ -179,7 +78,6 @@ video {
                       <input
                         type="file"
                         id="folder-selecter"
-                        name="folder-files"
                         webkitdirectory
                         @change="uploadFiles"
                         required
@@ -193,33 +91,40 @@ video {
               </div>
             </div>
             <hr />
-            <div>
-              <div v-for="file in files" :key="file.name">
-                <p>{{ file.name }}</p>
-                <div class="swiper-custom-parent">
-                  <div class="swiper-container mySwiper">
-                    <div class="swiper-wrapper">
-                      <img src="" class="swiper-slide js-modal-open" />
-                      <img src="" class="swiper-slide js-modal-open" />
-                      <img src="" class="swiper-slide js-modal-open" />
-                      <img src="" class="swiper-slide js-modal-open" />
-                    </div>
-                    <!-- 前ページボタン -->
-                    <div class="swiper-button-prev"></div>
-                    <!-- 次ページボタン -->
-                    <div class="swiper-button-next"></div>
-                    <!-- スクロールバー -->
-                    <div class="swiper-scrollbar"></div>
-                  </div>
+            <ul class="nav nav-tabs">
+              <li class="nav-item">
+                <div
+                  href=""
+                  class="nav-link active"
+                  @click="galleryType = 'movie-gallery'"
+                >
+                  <i class="fas fa-video"></i>
+                  Movie
                 </div>
-                <hr />
-              </div>
-            </div>
+              </li>
+              <li class="nav-item">
+                <div
+                  href=""
+                  class="nav-link"
+                  @click="galleryType = 'picture-gallery'"
+                >
+                  <i class="far fa-image"></i>
+                  Picture
+                </div>
+              </li>
+              <li class="nav-item">
+                <a href="" class="nav-link">
+                  <i class="far fa-file"></i>
+                  Other
+                </a>
+              </li>
+            </ul>
+            <component :is="galleryType" :files="files" />
           </div>
         </div>
       </div>
     </div>
-    <VideoPlayer :source="selectedVideoSource" />
+    <VideoPlayer source="" />
   </app-layout>
 </template>
 
@@ -228,12 +133,16 @@ import AppLayout from "@/Layouts/AppLayout.vue";
 import VideoPlayer from "@/Components/VideoPlayer.vue";
 import TreeViewer from "@/Components/TreeViewer.vue";
 import { useForm } from "@inertiajs/inertia-vue3";
+import PictureGallery from "@/Components/PictureGallery.vue";
+import MovieGallery from "@/Components/MovieGallery.vue";
 
 export default {
   components: {
     AppLayout,
     VideoPlayer,
     TreeViewer,
+    PictureGallery,
+    MovieGallery,
   },
   props: {
     progress: {
@@ -246,7 +155,7 @@ export default {
   },
   data: function () {
     return {
-      selectedVideoSource: "C:Usersm-tanakaworkmoviemov_hts-samp001.mp4",
+      galleryType: "movie-gallery",
     };
   },
   setup() {
@@ -275,6 +184,7 @@ export default {
     },
   },
   mounted: function () {
+    this.printDebugLog();
     new Swiper(".swiper-container", {
       watchSlidesProgress: true,
       watchSlidesVisibility: true,
@@ -300,6 +210,9 @@ export default {
         return false;
       });
     });
+  },
+  updated: function () {
+    this.printDebugLog();
   },
   methods: {
     selectUploadFile: function (e) {
@@ -339,6 +252,12 @@ export default {
         files.push(file);
       }
       return files;
+    },
+    printDebugLog: function () {
+      console.debug(`folderTree root: ${this.folderTree.text}`);
+      console.debug(`files: ${this.files.length}件`);
+      console.debug(`postUri: ${this.postUri}`);
+      console.debug(`galleryType: ${this.galleryType}`);
     },
   },
 };

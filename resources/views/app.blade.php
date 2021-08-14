@@ -13,6 +13,7 @@
 
     <!-- Styles -->
     <link rel="stylesheet" href="{{ mix('css/app.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/custome.css') }}">
 
     <!-- Scripts -->
     @routes
@@ -33,10 +34,6 @@
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
     </script>
 
-    <link rel="stylesheet" href="{{ asset('css/bootstrap-treeview.min.css') }}">
-    <script src="{{ asset('js/bootstrap-treeview.min.js') }}">
-    </script>
-
     <!-- Font Awesome -->
     <script src="https://kit.fontawesome.com/3e03309a31.js" crossorigin="anonymous"></script>
     <!-- Swiper -->
@@ -47,6 +44,10 @@
             max-width: initial;
         }
     </style>
+
+    <!-- Justified Gallery -->
+    <link rel="stylesheet" href="{{ asset('css/justifiedGallery.min.css') }}" />
+    <script src="{{ asset('js/jquery.justifiedGallery.min.js') }}"></script>
 </head>
 
 <body class="font-sans antialiased">
